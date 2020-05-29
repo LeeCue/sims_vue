@@ -59,6 +59,8 @@ export const formatRoutes = (routes) => {
                     require(['../views/admin/' + component + '.vue'], resolve);
                 } else if (component.startsWith('Home')) {
                     require(['../views/common/' + component + '.vue'], resolve);
+                } else if (component.startsWith('AcademyManage')) {
+                    require(['../views/admin/' + component + '.vue']);
                 }
             }
         };
