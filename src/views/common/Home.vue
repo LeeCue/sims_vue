@@ -5,8 +5,6 @@
 </template>
 
 <script>
-    import {lazyAMapApiLoaderInstance} from 'vue-amap';
-
     export default {
         name: "Home",
         mounted() {
@@ -34,11 +32,11 @@
             function onComplete(data) {
                 // data是具体的定位信息
                 console.log(data);
-            };
+            }
 
             function onError(data) {
                 // 定位出错
-            };
+            }
         }
     }
 </script>
