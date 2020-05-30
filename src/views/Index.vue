@@ -1,5 +1,5 @@
 <template id="layout">
-    <div style="height: 100%">
+    <div style="height: 100%;">
         <el-container>
             <el-header class="homeHeader">
                 <div class="title" style="color: white;font-size: 18px;float: left">学生信息管理系统
@@ -66,7 +66,7 @@
     export default {
         data() {
             return {
-                isCollapse: true,
+                isCollapse: false,
                 //user: JSON.parse(window.sessionStorage.getItem("user")),
                 user: JSON.parse(window.localStorage.getItem('user')),
                 widthVal: '200px',

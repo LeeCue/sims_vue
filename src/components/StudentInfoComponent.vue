@@ -2,12 +2,15 @@
     <div style="text-align: center">
         <h1>学生信息管理</h1>
 
-        <div class="studentTable">
+        <el-row class="studentTable" type="flex">
+            <el-col span="24">
             <div style="margin-top: 20px;display: flex;margin-left: 10px;">
-                <el-button type="primary" size="small" @click="selectConditionFormVisible = true">条件查询或导出</el-button>
+                <el-button type="primary" size="small" @click="selectConditionFormVisible = true">条件查询或导出
+                </el-button>
                 <el-button type="warning" size="small" @click="insertStudentInfoVisible = true">录入信息</el-button>
                 <el-tooltip effect="dark" content="将选中的学生数据导出" placement="top-start">
-                    <el-button type="info" @click="exportSelectedData" size="small" style="margin-left: 10px">选择导出</el-button>
+                    <el-button type="info" @click="exportSelectedData" size="small" style="margin-left: 10px">选择导出
+                    </el-button>
                 </el-tooltip>
             </div>
             <el-table :data="students"
@@ -76,7 +79,8 @@
                 <el-button @click="toggleSelection(students)" size="small">全选</el-button>
                 <el-button @click="toggleSelection()" size="small">取消选择</el-button>
             </div>
-        </div>
+            </el-col>
+        </el-row>
 
         <el-pagination
                 background
@@ -300,10 +304,12 @@
                 </el-upload>
             </div>
             <div v-if="active === 3 && this.errorNums > 0">
-                <p>共有 <span v-text="errorNums" style="color: red"></span> 条数据上传失败 <a href="javascript:void(0);" @click="downloadErrorFile">点击下载</a></p>
+                <p>共有 <span v-text="errorNums" style="color: red"></span> 条数据上传失败
+                    <a href="javascript:void(0);" @click="downloadErrorFile">点击下载</a></p>
             </div>
             <div slot="footer" class="dialog-footer" style="text-align: center">
-                <el-button type="primary" @click="insertForwardStep" v-if="active !== 0 && active <= 2">上一步</el-button>
+                <el-button type="primary" @click="insertForwardStep" v-if="active !== 0 && active <= 2">上一步
+                </el-button>
                 <el-button type="primary" @click="insertNextStep('insertOneForm')" v-text="buttonInfo" v-if="active >= 1"></el-button>
                 <el-button @click="insertDialogClosed">取 消</el-button>
             </div>
@@ -450,7 +456,7 @@
                     console.log(this.multipleSelection);
                     const fromData = new FormData();
                     const ids = [];
-                    for(let i = 0; i < this.multipleSelection.length; i++) {
+                    for (let i = 0; i < this.multipleSelection.length; i++) {
                         ids.push(this.multipleSelection[i].id);
                     }
                     console.log(ids);

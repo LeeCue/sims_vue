@@ -55,7 +55,6 @@
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit');
                         if (this.personalForm.avatar === require('../../assets/user_pic_middle.gif')) {
                             this.personalForm.avatar = '';
                         }
