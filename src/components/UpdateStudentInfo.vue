@@ -1,8 +1,8 @@
 <template>
-    <div style="margin-top: 30px">
+    <div style="margin-top: 30px;">
         <el-button type="primary" size="small" @click="goBack" style="width: 100px">返回上一页面</el-button>
         <div style="margin-top: 20px"></div>
-        <el-form :label-position="right" label-width="80px" :model="student" style="margin-left: 120px;">
+        <el-form :label-position="right" label-width="80px" :model="student" style="margin-left: 4cm;">
             <el-row>
                 <el-col :xl="8" :xs="12">
                     <el-form-item label="学工号">

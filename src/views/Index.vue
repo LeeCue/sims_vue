@@ -1,8 +1,13 @@
 <template id="layout">
-    <div>
+    <div style="height: 100%">
         <el-container>
             <el-header class="homeHeader">
-                <div class="title" style="color: white;font-size: 18px;float: left">学生信息管理系统</div>
+                <div class="title" style="color: white;font-size: 18px;float: left">学生信息管理系统
+                    <div class="collapse-btn" @click="collapseChange">
+                        <i v-if="!isCollapse" class="el-icon-s-fold"></i>
+                        <i v-else class="el-icon-s-unfold"></i>
+                    </div>
+                </div>
                 <div>
                     <el-button icon="el-icon-bell" type="text" style="margin-right: 8px;color: #00b5ad;" size="normal"></el-button>
                     <el-dropdown class="userInfo" @command="commandHandler">
@@ -18,25 +23,29 @@
                 </div>
             </el-header>
             <el-container>
-                <el-aside width="200px">
+                <el-aside :style="{width: widthVal}">
                     <el-row>
                         <el-col :span="24">
-                            <el-menu
-                                    router
-                                    class="el-menu-vertical-demo"
-                                    background-color="#333333"
-                                    text-color="#fff"
-                                    active-text-color="#edb102">
-                                <el-submenu :index="index + ''" v-for="(item, index) in routes" v-if="!item.hidden" :key="index">
-                                    <template slot="title">
-                                        <i style="color: #E4E7ED;margin-right: 5px" :class="item.iconCls"></i>
-                                        <span v-text="item.name"></span>
-                                    </template>
-                                    <el-menu-item :index="child.path" v-for="(child,index1) in item.children" :key="index1">
-                                        {{child.name}}
-                                    </el-menu-item>
-                                </el-submenu>
-                            </el-menu>
+                            <div class="sidebar">
+                                <el-menu
+                                        :collapse="isCollapse"
+                                        :collapse-transition="false"
+                                        router
+                                        class="el-menu-vertical-demo1"
+                                        background-color="#333333"
+                                        text-color="#fff"
+                                        active-text-color="#edb102">
+                                    <el-submenu :index="index + ''" v-for="(item, index) in routes" v-if="!item.hidden" :key="index">
+                                        <template slot="title">
+                                            <i style="color: #E4E7ED;margin-right: 5px" :class="item.iconCls"></i>
+                                            <span v-text="item.name"></span>
+                                        </template>
+                                        <el-menu-item :index="child.path" v-for="(child,index1) in item.children" :key="index1">
+                                            {{child.name}}
+                                        </el-menu-item>
+                                    </el-submenu>
+                                </el-menu>
+                            </div>
                         </el-col>
                     </el-row>
                 </el-aside>
@@ -60,6 +69,7 @@
                 isCollapse: true,
                 //user: JSON.parse(window.sessionStorage.getItem("user")),
                 user: JSON.parse(window.localStorage.getItem('user')),
+                widthVal: '200px',
             };
         },
         computed: {
@@ -90,12 +100,28 @@
                     });
                 }
             },
+            collapseChange() {
+                this.isCollapse = !this.isCollapse;
+                if (this.isCollapse) {
+                    this.widthVal = '80px';
+                } else {
+                    this.widthVal = '200px';
+                }
+            }
         }
     };
 </script>
 
 <style>
-    .el-menu-vertical-demo:not(.el-menu--collapse) {
+    .collapse-btn{
+        float: left;
+        padding: 0 10px;
+        cursor: pointer;
+        color: white;
+        font-size: 20px;
+    }
+
+    .el-menu-vertical-demo1:not(.el-menu--collapse) {
         width: 200px;
         list-style-type: none;
         top: 60px;
@@ -137,32 +163,12 @@
         margin-top: 60px;
     }
 
-    /*.el-container {
+    .sidebar > ul {
         height: 100%;
-        padding: 0;
-        margin: 0;
-    }*/
-
-    /*.el-header {
-        background-color: #262f3e;
-        color: #333;
-        line-height: 50px;
-    }*/
-
-    /*.el-aside {
-        display: block;
-        position: absolute;
-        left: 0;
         top: 60px;
-        bottom: 0;
-        overflow-y: scroll;
-    }
-
-    .el-main {
-        display: block;
-        position: absolute;
+        margin: 0;
+        padding: 0;
         overflow: auto;
-        margin-top: 60px;
-        margin-left: 200px;
-    }*/
+        position: fixed;
+    }
 </style>

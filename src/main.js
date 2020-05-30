@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import echarts from 'echarts';
+import AMap from 'vue-amap';
 import {excelFilePostUpload, postKeyValueRequest} from './utils/api';
 import {postFileRequest} from "./utils/api";
 import {postJsonRequest} from "./utils/api";
@@ -23,6 +24,12 @@ Vue.prototype.getRequest = getRequest;
 Vue.prototype.putRequest = putRequest;
 Vue.prototype.deleteRequest = deleteRequest;
 Vue.prototype.$echarts = echarts;
+Vue.use(AMap);
+AMap.initAMapApiLoader({
+    key: '32e0ada3e6fdaa1cdb517899ab6ea8fd',
+    plugin: ['Autocomplete', 'PlaceSearch', 'Scale', 'OverView', 'ToolBar', 'MapType', 'PolyEditor', 'AMap.CircleEditor',
+             'Geolocation']
+});
 
 new Vue({
   router,
