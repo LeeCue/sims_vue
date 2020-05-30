@@ -21,6 +21,7 @@
                 buttonPosition: 'RB'
             });
 
+            // test commit
             geolocation.getCurrentPosition(function (status, result) {
                 if (status === 'complete') {
                     onComplete(result)
