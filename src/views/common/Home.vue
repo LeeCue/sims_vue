@@ -120,7 +120,6 @@
             }
 
             const _this = this;
-
             AMap.plugin('AMap.CitySearch', function () {
                 var citySearch = new AMap.CitySearch();
                 citySearch.getLocalCity(function (status, result) {

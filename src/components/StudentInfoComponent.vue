@@ -3,7 +3,7 @@
         <h1>学生信息管理</h1>
 
         <el-row class="studentTable" type="flex">
-            <el-col span="24">
+            <el-col :span="24">
                 <div style="margin-top: 20px;display: flex;margin-left: 10px;">
                     <el-button type="primary" size="small" @click="selectConditionFormVisible = true">条件查询或导出
                     </el-button>
@@ -175,7 +175,7 @@
         </el-dialog>
 
         <!-- 学生信息录入过程 -->
-        <el-dialog v-dialogDrag title="学生信息录入" :visible.sync="insertStudentInfoVisible" width="30%" :before-close="insertDialogClosed">
+        <el-dialog title="学生信息录入" :visible.sync="insertStudentInfoVisible" width="30%" :before-close="insertDialogClosed">
             <div style="text-align: left;">
                 <el-steps :space="200" :active="active" finish-status="success" align-center>
                     <el-step title="步骤一" description="选择录入方式（单条\批量）"></el-step>
