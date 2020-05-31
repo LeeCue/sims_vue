@@ -578,7 +578,7 @@
                 this.insertOneInfo = false;
                 this.insertMultipleInfo = false;
                 this.fileList = [];
-                this.insertOneForm = '';
+                this.insertOneForm = {};
                 this.insertStudentInfoVisible = false;
             },
             insertForwardStep() {
