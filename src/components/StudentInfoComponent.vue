@@ -4,81 +4,83 @@
 
         <el-row class="studentTable" type="flex">
             <el-col span="24">
-            <div style="margin-top: 20px;display: flex;margin-left: 10px;">
-                <el-button type="primary" size="small" @click="selectConditionFormVisible = true">条件查询或导出
-                </el-button>
-                <el-button type="warning" size="small" @click="insertStudentInfoVisible = true">录入信息</el-button>
-                <el-tooltip effect="dark" content="将选中的学生数据导出" placement="top-start">
-                    <el-button type="info" @click="exportSelectedData" size="small" style="margin-left: 10px">选择导出
+                <div style="margin-top: 20px;display: flex;margin-left: 10px;">
+                    <el-button type="primary" size="small" @click="selectConditionFormVisible = true">条件查询或导出
                     </el-button>
-                </el-tooltip>
-            </div>
-            <el-table :data="students"
-                      stripe
-                      v-loading="loadingFlag"
-                      ref="multipleTable"
-                      @selection-change="handleSelectionChange"
-                      style="width: fit-content;">
-                <el-table-column
-                        type="selection"
-                        width="55">
-                </el-table-column>
-                <el-table-column
-                        fixed
-                        prop="id"
-                        label="学工号"
-                        sortable
-                        width="150">
-                </el-table-column>
-                <el-table-column
-                        prop="name"
-                        label="姓名"
-                        sortable
-                        width="150">
-                </el-table-column>
-                <el-table-column
-                        prop="sex"
-                        label="性别"
-                        width="100">
-                </el-table-column>
-                <el-table-column
-                        prop="email"
-                        label="邮箱"
-                        width="200">
-                </el-table-column>
-                <el-table-column
-                        prop="classes.name"
-                        label="班级"
-                        sortable
-                        width="150">
-                </el-table-column>
-                <el-table-column
-                        prop="major.name"
-                        label="专业"
-                        width="200">
-                </el-table-column>
-                <el-table-column
-                        prop="academy.name"
-                        label="学院"
-                        width="200">
-                </el-table-column>
-                <el-table-column
-                        prop="createTime"
-                        label="入学时间"
-                        sortable
-                        width="200">
-                </el-table-column>
-                <el-table-column label="操作" width="150">
-                    <template slot-scope="scope">
-                        <el-button @click="handleClick(scope.row)" size="mini">编辑</el-button>
-                        <el-button @click="handleDeleteUser(scope.row)" type="danger" size="mini">删除</el-button>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div style="display: flex;margin-top: 20px">
-                <el-button @click="toggleSelection(students)" size="small">全选</el-button>
-                <el-button @click="toggleSelection()" size="small">取消选择</el-button>
-            </div>
+                    <el-button type="warning" size="small" @click="insertStudentInfoVisible = true">录入信息</el-button>
+                    <el-tooltip effect="dark" content="将选中的学生数据导出" placement="top-start">
+                        <el-button type="info" @click="exportSelectedData" size="small" style="margin-left: 10px">选择导出
+                        </el-button>
+                    </el-tooltip>
+                </div>
+                <div style="margin-top: 15px;">
+                    <el-table :data="students"
+                              stripe
+                              v-loading="loadingFlag"
+                              ref="multipleTable"
+                              @selection-change="handleSelectionChange"
+                              style="width: fit-content;box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)">
+                        <el-table-column
+                                type="selection"
+                                width="55">
+                        </el-table-column>
+                        <el-table-column
+                                fixed
+                                prop="id"
+                                label="学工号"
+                                sortable
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="name"
+                                label="姓名"
+                                sortable
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="sex"
+                                label="性别"
+                                width="100">
+                        </el-table-column>
+                        <el-table-column
+                                prop="email"
+                                label="邮箱"
+                                width="200">
+                        </el-table-column>
+                        <el-table-column
+                                prop="classes.name"
+                                label="班级"
+                                sortable
+                                width="150">
+                        </el-table-column>
+                        <el-table-column
+                                prop="major.name"
+                                label="专业"
+                                width="200">
+                        </el-table-column>
+                        <el-table-column
+                                prop="academy.name"
+                                label="学院"
+                                width="200">
+                        </el-table-column>
+                        <el-table-column
+                                prop="createTime"
+                                label="入学时间"
+                                sortable
+                                width="200">
+                        </el-table-column>
+                        <el-table-column label="操作" width="150">
+                            <template slot-scope="scope">
+                                <el-button @click="handleClick(scope.row)" size="mini">编辑</el-button>
+                                <el-button @click="handleDeleteUser(scope.row)" type="danger" size="mini">删除</el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </div>
+                <div style="display: flex;margin-top: 20px">
+                    <el-button @click="toggleSelection(students)" size="small">全选</el-button>
+                    <el-button @click="toggleSelection()" size="small">取消选择</el-button>
+                </div>
             </el-col>
         </el-row>
 
@@ -173,7 +175,7 @@
         </el-dialog>
 
         <!-- 学生信息录入过程 -->
-        <el-dialog title="学生信息录入" :visible.sync="insertStudentInfoVisible" width="30%" :before-close="insertDialogClosed">
+        <el-dialog v-dialogDrag title="学生信息录入" :visible.sync="insertStudentInfoVisible" width="30%" :before-close="insertDialogClosed">
             <div style="text-align: left;">
                 <el-steps :space="200" :active="active" finish-status="success" align-center>
                     <el-step title="步骤一" description="选择录入方式（单条\批量）"></el-step>
@@ -767,6 +769,6 @@
     }
 
     .studentTable {
-        margin-left: 1.5cm;
+        margin-left: 1.78cm
     }
 </style>

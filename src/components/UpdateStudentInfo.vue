@@ -1,6 +1,6 @@
 <template>
     <div style="margin-top: 30px;">
-        <el-button type="primary" size="small" @click="goBack" style="width: 100px">返回上一页面</el-button>
+        <el-page-header @back="goBack" content="详情页面"></el-page-header>
         <div style="margin-top: 20px"></div>
         <el-form :label-position="right" label-width="80px" :model="student" style="margin-left: 4cm;">
             <el-row>

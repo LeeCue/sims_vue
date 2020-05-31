@@ -1,8 +1,8 @@
-<template id="layout">
+<template>
     <div style="height: 100%;">
         <el-container>
             <el-header class="homeHeader">
-                <div class="title" style="color: white;font-size: 18px;float: left">学生信息管理系统
+                <div class="title" style="color: white;font-size: 18px;float: left;">学生信息管理系统
                     <div class="collapse-btn" @click="collapseChange">
                         <i v-if="!isCollapse" class="el-icon-s-fold"></i>
                         <i v-else class="el-icon-s-unfold"></i>
@@ -170,5 +170,9 @@
         padding: 0;
         overflow: auto;
         position: fixed;
+    }
+
+    body{
+        background: url("../assets/leaves-pattern.png");
     }
 </style>
