@@ -1,33 +1,8 @@
 <template>
     <div>
         <el-row :gutter="20" type="flex">
-            <el-col :span="10">
-                <el-tabs tab-position="left" type="border-card" style="height: 400px; overflow-x: auto">
-                    <el-tab-pane>
-                        <span slot="label">
-                            <i class="el-icon-s-claim"></i>
-                            <span>教务通知公告</span>
-                        </span>
-                        <div>
-                            <div @click="moreClick(1)"><i class="el-icon-more icon-more"></i></div>
-                            <br>
-                            <div v-for="content in noticeContent" style="height: 30px">
-                                <div>
-                                    <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
-                                    <div class="content-date" v-text="content.createTime"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane><span slot="label"><i class="el-icon-s-opportunity"></i>
-                        <span>测试</span>
-                    </span>test111
-                    </el-tab-pane>
-                </el-tabs>
-            </el-col>
-
             <!-- 个人信息名片 -->
-            <el-col :span="8">
+            <el-col :span="12">
                 <el-card shadow="hover" style="height: 230px; width: 530px">
                     <div class="user-info">
                         <img class="user-avatar" :src=this.avatarUrl alt=""/>
@@ -45,6 +20,31 @@
                         </div>
                     </div>
                 </el-card>
+            </el-col>
+
+            <el-col :span="12">
+                <el-tabs tab-position="left" type="border-card" style="height: 400px; overflow-x: auto;">
+                    <el-tab-pane>
+                        <span slot="label">
+                            <i class="el-icon-s-claim"></i>
+                            <span>教务通知公告</span>
+                        </span>
+                        <div>
+                            <div @click="moreClick(1)"><i class="el-icon-more icon-more"></i></div>
+                            <br>
+                            <div v-for="content in noticeContent" style="height: 30px">
+                                <div>
+                                    <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
+                                    <div class="content-date" v-text="content.createTime"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane><span slot="label"><i class="el-icon-s-opportunity"></i>
+                        <span>系统公告</span>
+                    </span>test111
+                    </el-tab-pane>
+                </el-tabs>
             </el-col>
         </el-row>
 
