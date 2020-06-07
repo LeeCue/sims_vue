@@ -8,6 +8,7 @@ export default new Vuex.Store({
         user: JSON.parse(window.sessionStorage.getItem('user')),
         routes: [],
         updateStudent: [],
+        currentBoardId: -1,
     },
     mutations: {
         //写法与getters相类似
@@ -35,7 +36,13 @@ export default new Vuex.Store({
         },
         REMOVE_STUDENT(state) {
             state.updateStudent = '';
-        }
+        },
+        ADD_CURRENT_BOARD_ID(state, data) {
+            state.currentBoardId = data;
+        },
+        REMOVE_CURRENT_BOARD_ID(state) {
+            state.currentBoardId = -1;
+        },
     },
     actions: {},
     modules: {}

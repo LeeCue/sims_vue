@@ -173,6 +173,6 @@
     }
 
     body{
-        background: url("../assets/leaves-pattern.png");
+        background: url("../assets/so-white.png");
     }
 </style>

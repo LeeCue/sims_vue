@@ -54,11 +54,13 @@
         <el-row :gutter="20" type="flex">
             <el-col :span="12">
                 <el-card class="chart-card" shadow="hover">
+                    <!-- 访问人数报表 -->
                     <div id="visitedNum" style="width: 800px;height:400px;"></div>
                 </el-card>
             </el-col>
             <el-col :span="12">
                 <el-card class="chart-card" shadow="hover">
+                    <!-- 学院人数报表 -->
                     <div id="academyNum" style="width: 800px;height:400px;"></div>
                 </el-card>
             </el-col>
@@ -71,6 +73,7 @@
         name: "Home",
         data() {
             return {
+                inputValue1: 'sss',
                 value: new Date(),
                 userInfo: '',
                 role: '',
@@ -102,6 +105,7 @@
         },
         watch: {},
         mounted() {
+            //数据的初始化
             this.drawVisitedNum();
             this.drawAcademyNum();
             //document.querySelector('body').setAttribute('style', 'background: #f0f0f0');
