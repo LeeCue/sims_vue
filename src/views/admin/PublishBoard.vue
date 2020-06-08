@@ -123,10 +123,12 @@
             },
             doSearch() {
                 //处理搜索逻辑
+                this.initTableData(this.keywords);
             },
             changeName(name) {
                 this.currentName = name;
                 if (name === '') {
+                    this.initTableData('');
                     this.$store.commit('REMOVE_CURRENT_BOARD_ID');
                 }
             },
@@ -135,7 +137,20 @@
                 this.$store.commit('ADD_CURRENT_BOARD_ID', obj.id);
             },
             handleDelete(obj) {
-
+                this.$confirm('是否永久删除【' + obj.title + '】该条公告？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.deleteRequest("/web/board/" + obj.id).then(resp => {
+                        this.initTableData('');
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除'
+                    });
+                });
             },
             publishedSwitch(obj) {
                 this.getRequest('/web/changeBoard/published?id=' + obj.id + '&published=' + obj.published).then(resp => {

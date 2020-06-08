@@ -9,6 +9,7 @@ export default new Vuex.Store({
         routes: [],
         updateStudent: [],
         currentBoardId: -1,
+        boardId: -1,
     },
     mutations: {
         //写法与getters相类似

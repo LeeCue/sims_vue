@@ -65,20 +65,22 @@
         <div style="margin-top: 30px"></div>
 
         <!-- Echart报表 -->
-        <el-row :gutter="20" type="flex">
-            <el-col :span="12">
-                <el-card class="chart-card" shadow="hover">
-                    <!-- 访问人数报表 -->
-                    <div id="visitedNum" style="width: 800px;height:400px;"></div>
-                </el-card>
-            </el-col>
-            <el-col :span="12">
-                <el-card class="chart-card" shadow="hover">
-                    <!-- 学院人数报表 -->
-                    <div id="academyNum" style="width: 800px;height:400px;"></div>
-                </el-card>
-            </el-col>
-        </el-row>
+        <keep-alive>
+            <el-row :gutter="20" type="flex">
+                <el-col :span="12">
+                    <el-card class="chart-card" shadow="hover">
+                        <!-- 访问人数报表 -->
+                        <div id="visitedNum" style="width: 800px;height:400px;"></div>
+                    </el-card>
+                </el-col>
+                <el-col :span="12">
+                    <el-card class="chart-card" shadow="hover">
+                        <!-- 学院人数报表 -->
+                        <div id="academyNum" style="width: 800px;height:400px;"></div>
+                    </el-card>
+                </el-col>
+            </el-row>
+        </keep-alive>
     </div>
 </template>
 
@@ -265,8 +267,8 @@
                 myChart.setOption(option);
             },
             contentClick(val) {
-                //展示公告内容
-                alert(val);
+                this.$store.state.boardId = val;
+                this.$router.replace('/boardDetails');
             },
             tabClick(tab) {
                 this.activeTab = tab.name;
