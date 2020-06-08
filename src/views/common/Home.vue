@@ -1,33 +1,8 @@
 <template>
     <div>
         <el-row :gutter="20" type="flex">
-            <el-col :span="10">
-                <el-tabs tab-position="left" type="border-card" style="height: 400px; overflow-x: auto">
-                    <el-tab-pane>
-                        <span slot="label">
-                            <i class="el-icon-s-claim"></i>
-                            <span>教务通知公告</span>
-                        </span>
-                        <div>
-                            <div @click="moreClick(1)"><i class="el-icon-more icon-more"></i></div>
-                            <br>
-                            <div v-for="content in noticeContent" style="height: 30px">
-                                <div>
-                                    <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
-                                    <div class="content-date" v-text="content.createTime"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </el-tab-pane>
-                    <el-tab-pane><span slot="label"><i class="el-icon-s-opportunity"></i>
-                        <span>测试</span>
-                    </span>test111
-                    </el-tab-pane>
-                </el-tabs>
-            </el-col>
-
             <!-- 个人信息名片 -->
-            <el-col :span="8">
+            <el-col :span="12">
                 <el-card shadow="hover" style="height: 230px; width: 530px">
                     <div class="user-info">
                         <img class="user-avatar" :src=this.avatarUrl alt=""/>
@@ -46,6 +21,31 @@
                     </div>
                 </el-card>
             </el-col>
+
+            <el-col :span="12">
+                <el-tabs tab-position="left" type="border-card" style="height: 400px; overflow-x: auto;">
+                    <el-tab-pane>
+                        <span slot="label">
+                            <i class="el-icon-s-claim"></i>
+                            <span>教务通知公告</span>
+                        </span>
+                        <div>
+                            <div @click="moreClick(1)"><i class="el-icon-more icon-more"></i></div>
+                            <br>
+                            <div v-for="content in noticeContent" style="height: 30px">
+                                <div>
+                                    <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
+                                    <div class="content-date" v-text="content.createTime"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </el-tab-pane>
+                    <el-tab-pane><span slot="label"><i class="el-icon-s-opportunity"></i>
+                        <span>系统公告</span>
+                    </span>test111
+                    </el-tab-pane>
+                </el-tabs>
+            </el-col>
         </el-row>
 
         <div style="margin-top: 30px"></div>
@@ -54,11 +54,13 @@
         <el-row :gutter="20" type="flex">
             <el-col :span="12">
                 <el-card class="chart-card" shadow="hover">
+                    <!-- 访问人数报表 -->
                     <div id="visitedNum" style="width: 800px;height:400px;"></div>
                 </el-card>
             </el-col>
             <el-col :span="12">
                 <el-card class="chart-card" shadow="hover">
+                    <!-- 学院人数报表 -->
                     <div id="academyNum" style="width: 800px;height:400px;"></div>
                 </el-card>
             </el-col>
@@ -71,6 +73,7 @@
         name: "Home",
         data() {
             return {
+                inputValue1: 'sss',
                 value: new Date(),
                 userInfo: '',
                 role: '',
@@ -102,6 +105,7 @@
         },
         watch: {},
         mounted() {
+            //数据的初始化
             this.drawVisitedNum();
             this.drawAcademyNum();
             //document.querySelector('body').setAttribute('style', 'background: #f0f0f0');
