@@ -77,6 +77,7 @@
             <el-pagination
                     layout="prev, pager, next"
                     :total="boardsTotal"
+                    :page-size="5"
                     :current-page="currPage"
                     @current-change="handleCurrentChange">
             </el-pagination>
@@ -91,7 +92,7 @@
         name: "PublishBoard",
         data() {
             return {
-                boardsTotal: 0,
+                boardsTotal: 1,
                 currPage: 1,
                 keywords: '',
                 currentName: '',
@@ -109,16 +110,14 @@
         methods: {
             handleCurrentChange(val) {
                 this.currPage = val;
-                this.initTableData('');
+                this.initTableData(this.keywords);
             },
             initTableData(keyword) {
                 this.getRequest('/web/init/board?keyword=' + keyword + '&currPage=' + this.currPage + '&pageSize=' + 5).then(resp => {
-                    if (resp.data) {
+                    if (resp) {
                         this.boardsTotal = resp.data.total;
                         this.tableData = resp.data.list;
                     }
-                }).catch(error => {
-
                 });
             },
             doSearch() {
