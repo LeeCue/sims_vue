@@ -1,71 +1,70 @@
 <template>
-    <div>
-        <el-row :gutter="20" type="flex">
-            <!-- 个人信息名片 -->
-            <el-col :span="12">
-                <el-card shadow="hover" style="height: 230px; width: 530px">
-                    <div class="user-info">
-                        <img class="user-avatar" :src=this.avatarUrl alt=""/>
-                        <div class="user-info-cont">
-                            <div v-text="userInfo.name" style="color: #222;font-size: 25px;"></div>
-                            <div v-text="role"></div>
-                        </div>
-                    </div>
-                    <div style="display: flex; font-size: 15px; color: #999">
-                        本次登陆地点：
-                        <div class="user-info-list">
-                            <span v-text="position.province"></span>
-                            <el-divider direction="vertical"></el-divider>
-                            <span v-text="position.city"></span>
-                        </div>
-                    </div>
-                </el-card>
-            </el-col>
-
-            <el-col :span="12">
-                <el-tabs tab-position="left" type="border-card" style="height: 400px; overflow-x: auto;">
-                    <el-tab-pane>
-                        <span slot="label">
-                            <i class="el-icon-s-claim"></i>
-                            <span>教务通知公告</span>
-                        </span>
-                        <div>
-                            <div @click="moreClick(1)"><i class="el-icon-more icon-more"></i></div>
-                            <br>
-                            <div v-for="content in noticeContent" style="height: 30px">
-                                <div>
-                                    <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
-                                    <div class="content-date" v-text="content.createTime"></div>
-                                </div>
+    <div style="height:100%;width:100%;">
+            <el-col :span="10">
+                <el-row :gutter="10" type="flex">
+                    <el-card shadow="hover" style="height: 230px; width: 560px;background-color: bisque">
+                        <div class="user-info">
+                            <div @click="avatarClick">
+                                <img class="user-avatar" :src=this.avatarUrl alt=""/>
+                            </div>
+                            <div class="user-info-cont">
+                                <div v-text="userInfo.name" style="color: #222;font-size: 25px;"></div>
+                                <div v-text="role"></div>
                             </div>
                         </div>
-                    </el-tab-pane>
-                    <el-tab-pane><span slot="label"><i class="el-icon-s-opportunity"></i>
-                        <span>系统公告</span>
-                    </span>test111
-                    </el-tab-pane>
-                </el-tabs>
+                        <div style="display: flex; font-size: 15px; color: #999">
+                            本次登陆地点：
+                            <div class="user-info-list">
+                                <span v-text="position.province"></span>
+                                <el-divider direction="vertical"></el-divider>
+                                <span v-text="position.city"></span>
+                            </div>
+                        </div>
+                    </el-card>
+                </el-row>
+                <br>
+                <el-row :gutter="10" type="flex">
+                    <el-tabs tab-position="left" type="border-card" style="height: 600px;width: 560px; overflow-x: auto;">
+                        <el-tab-pane>
+                            <span slot="label">
+                                <i class="el-icon-s-claim"></i>
+                                <span>教务通知公告</span>
+                            </span>
+                            <div>
+                                <div @click="moreClick(1)"><i class="el-icon-more icon-more"></i></div>
+                                <br>
+                                <div v-for="content in noticeContent" style="height: 30px">
+                                    <div>
+                                        <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
+                                        <div class="content-date" v-text="content.createTime"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </el-tab-pane>
+                        <el-tab-pane><span slot="label"><i class="el-icon-s-opportunity"></i>
+                            <span>系统公告</span>
+                        </span>test111
+                        </el-tab-pane>
+                    </el-tabs>
+                </el-row>
             </el-col>
-        </el-row>
 
-        <div style="margin-top: 30px"></div>
-
-        <!-- Echart报表 -->
-        <el-row :gutter="20" type="flex">
-            <el-col :span="12">
+        <el-col :span="14">
+            <el-row :gutter="10" type="flex" >
+            <el-card class="chart-card" shadow="hover" >
+                &lt;!&ndash; 学院人数报表 &ndash;&gt;
+                <div id="academyNum" style="width: 800px;height:350px"></div>
+            </el-card>
+            </el-row>
+            <br>
+            <el-row :gutter="10" type="flex">
                 <el-card class="chart-card" shadow="hover">
-                    <!-- 访问人数报表 -->
-                    <div id="visitedNum" style="width: 800px;height:400px;"></div>
+                    &lt;!&ndash; 访问人数报表 &ndash;&gt;
+                    <div id="visitedNum" style="width: 800px;height:350px;"></div>
                 </el-card>
-            </el-col>
-            <el-col :span="12">
-                <el-card class="chart-card" shadow="hover">
-                    <!-- 学院人数报表 -->
-                    <div id="academyNum" style="width: 800px;height:400px;"></div>
-                </el-card>
-            </el-col>
-        </el-row>
-    </div>
+            </el-row>
+        </el-col>
+            </div>
 </template>
 
 <script>
@@ -108,7 +107,7 @@
             //数据的初始化
             this.drawVisitedNum();
             this.drawAcademyNum();
-            //document.querySelector('body').setAttribute('style', 'background: #f0f0f0');
+            document.querySelector('body').setAttribute('style', 'background: #f0f0f0');
             this.userInfo = JSON.parse(localStorage.getItem('user'));
             if (this.userInfo.status === 1) {
                 this.role = '超级管理员';
@@ -136,9 +135,12 @@
             });
         },
         beforeDestroy() {
-            //document.querySelector('body').removeAttribute('style');
+            document.querySelector('body').removeAttribute('style');
         },
         methods: {
+            avatarClick(){
+                this.$router.replace('/center');
+            },
             drawVisitedNum() {
                 // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById("visitedNum"));
@@ -250,6 +252,9 @@
 </script>
 
 <style>
+    .grid-content{
+        border-radius: 4px;
+    }
     .el-tabs__item {
         font-size: 16px !important;
         font-family: 'monospace';
@@ -321,4 +326,8 @@
         margin-left: 50px;
     }
 
+    .el-col {
+
+        border-radius: 4px;
+    }
 </style>
