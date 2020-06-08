@@ -1,13 +1,150 @@
 <template>
-    <h1>教务管理公告</h1>
+    <div style="margin-top: 30px;margin-left: 30px;">
+        <el-row :gutter="20">
+            <el-col :span="6">
+                <el-button type="danger" v-if="currentName !== ''" size="small" @click="changeName('')">返回管理页
+                </el-button>
+                <el-button type="primary" v-if="currentName === ''" size="small" @click="changeName('AddBoardContent')">
+                    新增公告
+                </el-button>
+            </el-col>
+            <el-col :span="12" v-if="currentName === ''">
+                <el-input v-model="keywords" placeholder="请输入标题..." style="width: 300px" @keydown.enter.native="doSearch"></el-input>
+                <el-button type="primary" icon="el-icon-search" @click="doSearch" style="margin-left: 15px">搜索
+                </el-button>
+            </el-col>
+        </el-row>
+        <component v-bind:is="currentName" @changeName="changeName"></component>
+        <div class="table" v-if="currentName === ''" style="margin-top: 20px; margin-left: 55px">
+            <el-table
+                    :data="tableData"
+                    border
+                    style="width: fit-content">
+                <el-table-column
+                        type="index"
+                        width="60">
+                </el-table-column>
+                <el-table-column
+                        prop="typeName"
+                        label="公告类型"
+                        :width="columnWidth">
+                </el-table-column>
+                <el-table-column
+                        prop="title"
+                        label="标题"
+                        :width="columnWidth">
+                </el-table-column>
+                <el-table-column
+                        label="发布状态"
+                        :width="columnWidth">
+                    <template slot-scope="scope">
+                        <el-switch
+                                v-model="scope.row.published"
+                                active-text="发布"
+                                inactive-text="草稿"
+                                @change="publishedSwitch(scope.row)">
+                        </el-switch>
+                    </template>
+                </el-table-column>
+                <el-table-column
+                        prop="createTime"
+                        label="创建时间"
+                        :width="columnWidth">
+                </el-table-column>
+                <el-table-column
+                        prop="updateTime"
+                        label="修改时间"
+                        :width="columnWidth">
+                </el-table-column>
+                <el-table-column
+                        label="操作"
+                        width="150">
+                    <template slot-scope="scope">
+                        <el-button
+                                size="mini"
+                                @click="handleEdit(scope.row)">编辑
+                        </el-button>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="handleDelete(scope.row)">删除
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <div v-if="currentName === ''" class="block" style="position: absolute; left: 38%;margin-top: 20px">
+            <el-pagination
+                    layout="prev, pager, next"
+                    :total="boardsTotal"
+                    :current-page="currPage"
+                    @current-change="handleCurrentChange">
+            </el-pagination>
+        </div>
+    </div>
 </template>
 
 <script>
+    import AddBoardContent from "../../components/AddBoardContent";
+
     export default {
-        name: "PublishBoard"
+        name: "PublishBoard",
+        data() {
+            return {
+                boardsTotal: 0,
+                currPage: 1,
+                keywords: '',
+                currentName: '',
+                tableData: [],
+                columnWidth: 180,
+            }
+        },
+        components: {
+            AddBoardContent
+        },
+        watch: {},
+        mounted() {
+            this.initTableData('');
+        },
+        methods: {
+            handleCurrentChange(val) {
+                this.currPage = val;
+                this.initTableData('');
+            },
+            initTableData(keyword) {
+                this.getRequest('/web/init/board?keyword=' + keyword + '&currPage=' + this.currPage + '&pageSize=' + 5).then(resp => {
+                    if (resp.data) {
+                        this.boardsTotal = resp.data.total;
+                        this.tableData = resp.data.list;
+                    }
+                }).catch(error => {
+
+                });
+            },
+            doSearch() {
+                //处理搜索逻辑
+            },
+            changeName(name) {
+                this.currentName = name;
+                if (name === '') {
+                    this.$store.commit('REMOVE_CURRENT_BOARD_ID');
+                }
+            },
+            handleEdit(obj) {
+                this.currentName = 'AddBoardContent';
+                this.$store.commit('ADD_CURRENT_BOARD_ID', obj.id);
+            },
+            handleDelete(obj) {
+
+            },
+            publishedSwitch(obj) {
+                this.getRequest('/web/changeBoard/published?id=' + obj.id + '&published=' + obj.published).then(resp => {
+                });
+            },
+        }
     }
 </script>
 
-<style scoped>
+<style>
 
 </style>
