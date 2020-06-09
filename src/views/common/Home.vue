@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <el-row :gutter="20" type="flex">
+    <div style="height:100%;width:100%;">
+        <el-col :span="10">
+            <el-row :gutter="10" type="flex">
             <!-- 个人信息名片 -->
-            <el-col :span="12">
-                <el-card shadow="hover" style="height: 230px; width: 530px;">
+                <el-card shadow="hover" style="height: 230px; width: 560px;background-color: bisque">
                     <div class="user-info">
                         <div @click="avatarClick">
                             <img class="user-avatar" :src=this.avatarUrl alt=""/>
@@ -22,10 +22,10 @@
                         </div>
                     </div>
                 </el-card>
-            </el-col>
-
-            <el-col :span="12">
-                <el-tabs tab-position="left" v-model="activeTab" @tab-click="tabClick" type="border-card" style="height: 400px; overflow-x: auto;">
+            </el-row>
+            <br>
+            <el-row :gutter="10" type="flex">
+                <el-tabs tab-position="left" v-model="activeTab" @tab-click="tabClick" type="border-card" style="height: 600px;width: 560px; overflow-x: auto;">
                     <el-tab-pane name="教务通知公告">
                         <span slot="label">
                             <i class="el-icon-s-claim"></i>
@@ -59,27 +59,26 @@
                         </div>
                     </el-tab-pane>
                 </el-tabs>
-            </el-col>
-        </el-row>
-
-        <div style="margin-top: 30px"></div>
-
-        <!-- Echart报表 -->
-        <keep-alive>
-            <el-row :gutter="20" type="flex">
-                <el-col :span="12">
+            </el-row>
+        </el-col>
+         <keep-alive>
+        <el-col :span="14">
+            <el-row :gutter="10" type="flex" >
+                    <div style="margin-top: 30px"></div>
+                 <!-- Echart报表 -->
                     <el-card class="chart-card" shadow="hover">
                         <!-- 访问人数报表 -->
                         <div id="visitedNum" style="width: 800px;height:400px;"></div>
                     </el-card>
-                </el-col>
-                <el-col :span="12">
+            </el-row>
+            <br>
+            <el-row :gutter="10" type="flex">
                     <el-card class="chart-card" shadow="hover">
                         <!-- 学院人数报表 -->
                         <div id="academyNum" style="width: 800px;height:400px;"></div>
                     </el-card>
-                </el-col>
             </el-row>
+        </el-col>
         </keep-alive>
     </div>
 </template>
