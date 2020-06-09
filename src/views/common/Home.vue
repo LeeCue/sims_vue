@@ -3,7 +3,7 @@
         <el-col :span="10">
             <el-row :gutter="10" type="flex">
             <!-- 个人信息名片 -->
-                <el-card shadow="hover" style="height: 230px; width: 560px;background-color: bisque">
+                <el-card shadow="hover" style="height: 230px; width: 570px;background-color: bisque">
                     <div class="user-info">
                         <div @click="avatarClick">
                             <img class="user-avatar" :src=this.avatarUrl alt=""/>
@@ -25,7 +25,7 @@
             </el-row>
             <br>
             <el-row :gutter="10" type="flex">
-                <el-tabs tab-position="left" v-model="activeTab" @tab-click="tabClick" type="border-card" style="height: 600px;width: 560px; overflow-x: auto;">
+                <el-tabs tab-position="left" v-model="activeTab" @tab-click="tabClick" type="border-card" style="height: 570px;width: 570px; overflow-x: auto;">
                     <el-tab-pane name="教务通知公告">
                         <span slot="label">
                             <i class="el-icon-s-claim"></i>
@@ -68,14 +68,14 @@
                  <!-- Echart报表 -->
                     <el-card class="chart-card" shadow="hover">
                         <!-- 访问人数报表 -->
-                        <div id="visitedNum" style="width: 800px;height:400px;"></div>
+                        <div id="visitedNum" style="width: 800px;height:360px;"></div>
                     </el-card>
             </el-row>
             <br>
             <el-row :gutter="10" type="flex">
                     <el-card class="chart-card" shadow="hover">
                         <!-- 学院人数报表 -->
-                        <div id="academyNum" style="width: 800px;height:400px;"></div>
+                        <div id="academyNum" style="width: 800px;height:360px;"></div>
                     </el-card>
             </el-row>
         </el-col>
