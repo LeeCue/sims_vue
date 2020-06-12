@@ -1,11 +1,13 @@
 <template>
-    <div>
-        <el-row :gutter="20" type="flex">
+    <div style="height:100%;width:100%;">
+        <el-col :span="10">
+            <el-row :gutter="10" type="flex">
             <!-- 个人信息名片 -->
-            <el-col :span="12">
-                <el-card shadow="hover" style="height: 230px; width: 530px">
+                <el-card shadow="hover" style="height: 230px; width: 570px;background-color: bisque">
                     <div class="user-info">
-                        <img class="user-avatar" :src=this.avatarUrl alt=""/>
+                        <div @click="avatarClick">
+                            <img class="user-avatar" :src=this.avatarUrl alt=""/>
+                        </div>
                         <div class="user-info-cont">
                             <div v-text="userInfo.name" style="color: #222;font-size: 25px;"></div>
                             <div v-text="role"></div>
@@ -20,51 +22,64 @@
                         </div>
                     </div>
                 </el-card>
-            </el-col>
-
-            <el-col :span="12">
-                <el-tabs tab-position="left" type="border-card" style="height: 400px; overflow-x: auto;">
-                    <el-tab-pane>
+            </el-row>
+            <br>
+            <el-row :gutter="10" type="flex">
+                <el-tabs tab-position="left" v-model="activeTab" @tab-click="tabClick" type="border-card" style="height: 570px;width: 570px; overflow-x: auto;">
+                    <el-tab-pane name="教务通知公告">
                         <span slot="label">
                             <i class="el-icon-s-claim"></i>
                             <span>教务通知公告</span>
                         </span>
-                        <div>
-                            <div @click="moreClick(1)"><i class="el-icon-more icon-more"></i></div>
-                            <br>
-                            <div v-for="content in noticeContent" style="height: 30px">
-                                <div>
-                                    <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
-                                    <div class="content-date" v-text="content.createTime"></div>
-                                </div>
+                        <el-row :gutter="0" class="icon-more">
+                            <span @click="changePage1(false)"><i class="el-icon-caret-left"></i></span>
+                            <span @click="changePage1(true)"><i class="el-icon-caret-right"></i></span>
+                        </el-row>
+                        <br>
+                        <div v-for="content in noticeContent_1" style="height: 30px;">
+                            <div>
+                                <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
+                                <div class="content-date" v-text="content.createTime"></div>
                             </div>
                         </div>
                     </el-tab-pane>
-                    <el-tab-pane><span slot="label"><i class="el-icon-s-opportunity"></i>
-                        <span>系统公告</span>
-                    </span>test111
+                    <el-tab-pane name="教务系统公告"><span slot="label"><i class="el-icon-s-opportunity"></i>
+                        <span>教务系统公告</span>
+                    </span>
+                        <el-row :gutter="0" class="icon-more">
+                            <span @click="changePage2(false)"><i class="el-icon-caret-left"></i></span>
+                            <span @click="changePage2(true)"><i class="el-icon-caret-right"></i></span>
+                        </el-row>
+                        <br>
+                        <div v-for="content in noticeContent_2" style="height: 30px">
+                            <div>
+                                <div class="content-title" v-text="content.title" @click="contentClick(content.id)"></div>
+                                <div class="content-date" v-text="content.createTime"></div>
+                            </div>
+                        </div>
                     </el-tab-pane>
                 </el-tabs>
-            </el-col>
-        </el-row>
-
-        <div style="margin-top: 30px"></div>
-
-        <!-- Echart报表 -->
-        <el-row :gutter="20" type="flex">
-            <el-col :span="12">
-                <el-card class="chart-card" shadow="hover">
-                    <!-- 访问人数报表 -->
-                    <div id="visitedNum" style="width: 800px;height:400px;"></div>
-                </el-card>
-            </el-col>
-            <el-col :span="12">
-                <el-card class="chart-card" shadow="hover">
-                    <!-- 学院人数报表 -->
-                    <div id="academyNum" style="width: 800px;height:400px;"></div>
-                </el-card>
-            </el-col>
-        </el-row>
+            </el-row>
+        </el-col>
+         <keep-alive>
+        <el-col :span="14">
+            <el-row :gutter="10" type="flex" >
+                    <div style="margin-top: 30px"></div>
+                 <!-- Echart报表 -->
+                    <el-card class="chart-card" shadow="hover">
+                        <!-- 访问人数报表 -->
+                        <div id="visitedNum" style="width: 800px;height:360px;"></div>
+                    </el-card>
+            </el-row>
+            <br>
+            <el-row :gutter="10" type="flex">
+                    <el-card class="chart-card" shadow="hover">
+                        <!-- 学院人数报表 -->
+                        <div id="academyNum" style="width: 800px;height:360px;"></div>
+                    </el-card>
+            </el-row>
+        </el-col>
+        </keep-alive>
     </div>
 </template>
 
@@ -73,8 +88,7 @@
         name: "Home",
         data() {
             return {
-                inputValue1: 'sss',
-                value: new Date(),
+                activeTab: '教务通知公告',
                 userInfo: '',
                 role: '',
                 avatarUrl: '',
@@ -84,23 +98,14 @@
                     province: '',
                 },
                 orgOptions: {},
-                noticeContent: [
-                    {
-                        id: 1,
-                        title: 'test1这是一段很长的文字文字文字',
-                        createTime: '2020-5-2',
-                    },
-                    {
-                        id: 2,
-                        title: 'test2',
-                        createTime: '2020-4-2',
-                    },
-                    {
-                        id: 3,
-                        title: 'test3',
-                        createTime: '2020-3-2',
-                    },
-                ],
+                noticeContent_1: [],
+                noticeContent_2: [],
+                currPage1: 1,
+                currPage2: 1,
+                hasNextPage1: false,
+                hasPrePage1: false,
+                hasNextPage2: false,
+                hasPrePage2: false,
             }
         },
         watch: {},
@@ -109,6 +114,7 @@
             this.drawVisitedNum();
             this.drawAcademyNum();
             //document.querySelector('body').setAttribute('style', 'background: #f0f0f0');
+            this.initBoardContent();
             this.userInfo = JSON.parse(localStorage.getItem('user'));
             if (this.userInfo.status === 1) {
                 this.role = '超级管理员';
@@ -139,6 +145,28 @@
             //document.querySelector('body').removeAttribute('style');
         },
         methods: {
+            initBoardContent() {
+                let currPage = 0;
+                if (this.activeTab === '教务通知公告') {
+                    currPage = this.currPage1;
+                } else {
+                    currPage = this.currPage2;
+                }
+                this.getRequest('/web/board/type?currPage=' + currPage + '&pageSize=' + 10 + '&typeName=' + this.activeTab).then(resp => {
+                    if (this.activeTab === '教务通知公告') {
+                        this.noticeContent_1 = resp.data.list;
+                        this.hasNextPage1 = resp.data.hasNextPage;
+                        this.hasPrePage1 = resp.data.hasPreviousPage;
+                    } else {
+                        this.noticeContent_2 = resp.data.list;
+                        this.hasNextPage2 = resp.data.hasNextPage;
+                        this.hasPrePage2 = resp.data.hasPreviousPage;
+                    }
+                });
+            },
+            avatarClick() {
+                this.$router.replace('/center');
+            },
             drawVisitedNum() {
                 // 基于准备好的dom，初始化echarts实例
                 let myChart = this.$echarts.init(document.getElementById("visitedNum"));
@@ -237,13 +265,33 @@
                 };
                 myChart.setOption(option);
             },
-            moreClick(val) {
-                if (val === 1) {
-                    alert('教务通知公告，更多页面');
+            contentClick(val) {
+                this.$store.state.boardId = val;
+                this.$router.replace('/boardDetails');
+            },
+            tabClick(tab) {
+                this.activeTab = tab.name;
+                this.initBoardContent();
+            },
+            changePage1(val) {
+                if (val && this.hasNextPage1) {
+                    this.currPage1 = this.currPage1 + 1;
+                    this.initBoardContent();
+                }
+                if (!val && this.hasPrePage1) {
+                    this.currPage1 = this.currPage1 - 1;
+                    this.initBoardContent();
                 }
             },
-            contentClick(val) {
-                alert(val);
+            changePage2(val) {
+                if (val && this.hasNextPage1) {
+                    this.currPage2 = this.currPage2 + 1;
+                    this.initBoardContent();
+                }
+                if (!val && this.hasPrePage1) {
+                    this.currPage2 = this.currPage2 - 1;
+                    this.initBoardContent();
+                }
             }
         }
     }
@@ -269,7 +317,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        display: inline;
+        display: inline-block;
     }
 
     .content-title:hover {
@@ -281,12 +329,11 @@
         color: #777676;
         font-size: 14px;
         float: right;
-        position: relative;
     }
 
     .icon-more {
+        margin-top: -10px;
         float: right;
-        padding: 0 10px;
         color: #1890ff;
         cursor: pointer;
         font-size: 20px;

@@ -137,7 +137,7 @@
         background-color: #262f3e;
         position: fixed;
         top: 0;
-        z-index: 100;
+        z-index: 200;
         width: 100%;
         align-items: center;
         justify-content: space-between;

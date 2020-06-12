@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from "../views/Login";
 import Index from "../views/Index";
 import store from "../store";
+import BoardDetails from "../components/BoardDetails";
 import {initMenu} from "../utils/menu";
 
 Vue.use(VueRouter);
@@ -20,6 +21,22 @@ const routes = [
         name: Index,
         redirect: '/home',
         component: Index,
+        meta: {
+            requireAuth: true
+        }
+    },
+    {
+        path: '/',
+        name: Index,
+        redirect: '/home',
+        component: Index,
+        children: [
+            {
+                path: 'boardDetails',
+                name: '公告详情',
+                component: BoardDetails,
+            }
+        ],
         meta: {
             requireAuth: true
         }
