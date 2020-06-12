@@ -5,12 +5,15 @@
                 <el-button type="primary" @click="showInputAcademy">新增学院</el-button>
                 <el-button type="success" @click="showInputMajor">新增专业</el-button>
                 <el-button type="info" @click="showInputClass">新增班级</el-button>
+                <el-button type="primary" @click="showDeleteAcademy">删除学院</el-button>
+                <el-button type="success" @click="showDeleteMajor">删除专业</el-button>
+                <el-button type="info" @click="showDeleteClass">删除班级</el-button>
             </el-row>
             <div style="margin-top: 20px" v-if="showAcademy">
                 <label class="label-name">学院</label>
                 <el-input v-model="academyName" placeholder="请输入学院名称..." style="width: 200px"></el-input>
             </div>
-            <div style="margin-top: 20px; display: flex" v-if="showMajor">
+            <div style="margin-top: 20px; display: flex; margin-left:380px" v-if="showMajor">
                 <el-row>
                     <label class="label-name">选择学院信息</label>
                     <el-select v-model="selectedAcademy" clearable placeholder="请选择学院信息...">
@@ -27,7 +30,7 @@
                     <el-input v-model="majorName" placeholder="请输入专业名称..." style="width: 200px"></el-input>
                 </el-row>
             </div>
-            <div style="margin-top: 20px; display: flex" v-if="showClass">
+            <div style="margin-top: 20px; display: flex; margin-left:200px" v-if="showClass">
                 <el-row>
                     <label class="label-name">选择学院信息</label>
                     <el-select v-model="selectedAcademy" clearable placeholder="请选择学院信息...">
@@ -57,11 +60,12 @@
             </div>
             <div style="margin-top: 30px">
                 <el-row>
-                    <el-button type="primary" @click="submit" round>提交</el-button>
-                    <el-button type="success" @click="" plain round>重置</el-button>
+                    <el-button type="primary" v-if="submit" @click="submit" round>提交</el-button>
+                    <el-button type="success" v-if="reset" @click="reset" plain round>重置</el-button>
                 </el-row>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -74,6 +78,8 @@
                 showAcademy: false,
                 showMajor: false,
                 showClass: false,
+                submit:false,
+                reset:false,
                 //所有学院信息
                 allAcademy: [{
                     academyId: '1',
@@ -112,17 +118,48 @@
                 this.showAcademy = true;
                 this.showMajor = false;
                 this.showClass = false;
+                this.submit= true;
+                this.reset= true;
             },
             showInputMajor() {
                 //初始化所有学院信息 allAcademy
                 this.showMajor = true;
                 this.showAcademy = false;
                 this.showClass = false;
+                this.submit= true;
+                this.reset= true;
+                this.majorName= '';
             },
             showInputClass() {
                 this.showMajor = false;
                 this.showAcademy = false;
                 this.showClass = true;
+                this.submit= true;
+                this.reset= true;
+                this.majorName= '';
+            },
+            showDeleteAcademy(){
+                this.showAcademy = true;
+                this.showMajor = false;
+                this.showClass = false;
+                this.submit= true;
+                this.reset= true;
+            },
+            showDeleteMajor(){
+                this.showMajor = true;
+                this.showAcademy = false;
+                this.showClass = false;
+                this.submit= true;
+                this.reset= true;
+                this.majorName= '';
+            },
+            showDeleteClass(){
+                this.showMajor = false;
+                this.showAcademy = false;
+                this.showClass = true;
+                this.submit= true;
+                this.reset= true;
+                this.majorName= '';
             },
             submit() {
                 if (this.showAcademy) {
