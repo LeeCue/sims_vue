@@ -5,7 +5,7 @@
                 <div class="grid-content" style="margin-top:20px;">
                     <el-button type="primary" @click="dialogCreate = true">新建</el-button>
                     <el-button type="success" @click="dialogDelete = true ">删除</el-button>
-                    <el-button type="info" @click="dialogSelect = true">查找</el-button>
+
                 </div>
                 <el-dialog
                         title="新建学院、专业、班级"
@@ -26,13 +26,9 @@
                         :before-close="handleClose">
                     <el-form id="mySearchForm" :model="searchForm" ref="searchForm">
                         <el-form-item label="学院名称" >
-                            <el-input>
-                                class="formItem"
-                                clearable
-                                v-model="searchForm.id"
-                                placeholder="请输入学工号..."
-                                auto-complete="off"
-                                style="width: 300px">
+                            <el-input type="text" v-model.trim="input2" class="ym-input"  @input="change($event, index)">
+
+
                             </el-input>
                         </el-form-item>
                     </el-form>
@@ -53,8 +49,9 @@
                     <el-row>
                         <el-form >
                             <el-form-item label="专业名称">
-                                <el-input>
-                                    placeholder="请输入专业名称"
+                                <el-input type="text" v-model.trim="input2" class="ym-input"  @input="change($event, index)">
+
+
                                 </el-input>
                             </el-form-item>
                         </el-form>
@@ -83,8 +80,9 @@
                     <el-row>
                         <el-form >
                             <el-form-item label="班级名称">
-                                <el-input>
-                                    placeholder="请输入班级名称"
+                                <el-input type="text" v-model.trim="input2" class="ym-input"  @input="change($event, index)">
+
+
                                 </el-input>
                             </el-form-item>
                         </el-form>
@@ -115,8 +113,9 @@
                         :before-close="handleClose">
                     <el-form >
                         <el-form-item label="学院名称">
-                            <el-input>
-                                placeholder="请输入学院名称"
+                            <el-input type="text" v-model.trim="input2" class="ym-input"  @input="change($event, index)">
+
+
                             </el-input>
                         </el-form-item>
                     </el-form>
@@ -137,8 +136,9 @@
                     <el-row>
                         <el-form >
                             <el-form-item label="专业名称">
-                                <el-input>
-                                    placeholder="请输入专业名称"
+                                <el-input type="text" v-model.trim="input2" class="ym-input"  @input="change($event, index)">
+
+
                                 </el-input>
                             </el-form-item>
                         </el-form>
@@ -167,8 +167,9 @@
                     <el-row>
                         <el-form >
                             <el-form-item label="班级名称">
-                                <el-input>
-                                    placeholder="请输入班级名称"
+                                <el-input type="text" v-model.trim="input2" class="ym-input"  @input="change($event, index)">
+
+
                                 </el-input>
                             </el-form-item>
                         </el-form>
@@ -246,6 +247,7 @@
                 deleteAcademy:false,
                 deleteMajor:false,
                 deleteClass:false,
+
                 SearchForm:{
                 id:'',
                 },
@@ -304,6 +306,11 @@
             }
         },
         methods: {
+
+            change(e) {
+
+                this.$forceUpdate()
+            },
             handleClose(done) {
                 this.$confirm('确认关闭？')
                     .then(_ => {
@@ -327,3 +334,12 @@
 
     }
 </script>
+<style scoped>
+    .formItem {
+        float: left;
+    }
+
+    .studentTable {
+        margin-left: 1.78cm
+    }
+</style>
