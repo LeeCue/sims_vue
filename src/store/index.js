@@ -10,6 +10,8 @@ export default new Vuex.Store({
         updateStudent: [],
         currentBoardId: -1,
         boardId: -1,
+        currentCourseId: -1,
+        currentCourseName: '',
     },
     mutations: {
         //写法与getters相类似

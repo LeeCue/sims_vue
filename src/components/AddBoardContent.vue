@@ -118,14 +118,21 @@
             submitBoard() {
                 if (this.updateInfo) {
                     this.postJsonRequest('/web/update/board', this.boardForm).then(resp => {
-
+                        if (resp.data.status === 406) {
+                            this.showErrorMessage(resp.data.object);
+                        }
                     });
                 } else {
                     this.postJsonRequest('/web/add/board', this.boardForm).then(resp => {
-                        //console.log(resp);
+                        if (resp.data.status === 406) {
+                            this.showErrorMessage(resp.data.object);
+                        }
                     });
                 }
             },
+            showErrorMessage(message) {
+                this.$message.error(message);
+            }
         }
     }
 </script>

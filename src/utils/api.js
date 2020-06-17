@@ -27,7 +27,7 @@ axios.interceptors.response.use(success => {
     if (error.response.status === 504 || error.response.status === 404) {
         Message.error({message: '服务器正在忙...'});
     } else if (error.response.status === 401) {
-        Message.error({message: error.response.data.msg});
+        Message.error("尚未登录，请先登录!");
         window.sessionStorage.removeItem('user');
         window.localStorage.removeItem('user');
         router.replace('/login');

@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "ScoreArchieve"
+        name: "ScoreArchive"
     }
 </script>
 

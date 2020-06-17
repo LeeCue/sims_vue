@@ -88,7 +88,7 @@
                         cancelButtonText: '取消',
                         type: 'warning'
                     }).then(() => {
-                        this.getRequest("/logout");
+                        this.getRequest("/web/logout");
                         this.$store.commit('REMOVE_USER');
                         this.$store.commit('REMOVE_ROUTES');
                         this.$router.replace("/login");

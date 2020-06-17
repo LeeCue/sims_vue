@@ -1,9 +1,9 @@
 <template>
-    <div style="height:100%;width:100%;">
-        <el-col :span="10">
-            <el-row :gutter="10" type="flex">
+    <div>
+        <el-row :gutter="20" type="flex">
             <!-- 个人信息名片 -->
-                <el-card shadow="hover" style="height: 230px; width: 570px;background-color: bisque">
+            <el-col :span="12">
+                <el-card shadow="hover" style="height: 230px; width: 600px;">
                     <div class="user-info">
                         <div @click="avatarClick">
                             <img class="user-avatar" :src=this.avatarUrl alt=""/>
@@ -13,7 +13,7 @@
                             <div v-text="role"></div>
                         </div>
                     </div>
-                    <div style="display: flex; font-size: 15px; color: #999">
+                    <div style="display: flex; font-size: 15px; color: #999;">
                         本次登陆地点：
                         <div class="user-info-list">
                             <span v-text="position.province"></span>
@@ -22,10 +22,10 @@
                         </div>
                     </div>
                 </el-card>
-            </el-row>
-            <br>
-            <el-row :gutter="10" type="flex">
-                <el-tabs tab-position="left" v-model="activeTab" @tab-click="tabClick" type="border-card" style="height: 570px;width: 570px; overflow-x: auto;">
+            </el-col>
+
+            <el-col :span="12">
+                <el-tabs tab-position="left" v-model="activeTab" @tab-click="tabClick" type="border-card" style="height: 400px; overflow-x: auto;">
                     <el-tab-pane name="教务通知公告">
                         <span slot="label">
                             <i class="el-icon-s-claim"></i>
@@ -59,26 +59,27 @@
                         </div>
                     </el-tab-pane>
                 </el-tabs>
-            </el-row>
-        </el-col>
-         <keep-alive>
-        <el-col :span="14">
-            <el-row :gutter="10" type="flex" >
-                    <div style="margin-top: 30px"></div>
-                 <!-- Echart报表 -->
+            </el-col>
+        </el-row>
+
+        <div style="margin-top: 30px"></div>
+
+        <!-- Echart报表 -->
+        <keep-alive>
+            <el-row :gutter="20" type="flex">
+                <el-col :span="12">
                     <el-card class="chart-card" shadow="hover">
                         <!-- 访问人数报表 -->
-                        <div id="visitedNum" style="width: 800px;height:360px;"></div>
+                        <div id="visitedNum" style="width: 800px;height:400px;"></div>
                     </el-card>
-            </el-row>
-            <br>
-            <el-row :gutter="10" type="flex">
+                </el-col>
+                <el-col :span="12">
                     <el-card class="chart-card" shadow="hover">
                         <!-- 学院人数报表 -->
-                        <div id="academyNum" style="width: 800px;height:360px;"></div>
+                        <div id="academyNum" style="width: 800px;height:400px;"></div>
                     </el-card>
+                </el-col>
             </el-row>
-        </el-col>
         </keep-alive>
     </div>
 </template>
@@ -108,7 +109,11 @@
                 hasPrePage2: false,
             }
         },
-        watch: {},
+        watch: {
+            'position.city'(v1, v2) {
+                console.log(this.searchWeather(v1));
+            }
+        },
         mounted() {
             //数据的初始化
             this.drawVisitedNum();
@@ -145,6 +150,17 @@
             //document.querySelector('body').removeAttribute('style');
         },
         methods: {
+            searchWeather(city) {
+                AMap.plugin('AMap.Weather', function() {
+                    //创建天气查询实例
+                    var weather = new AMap.Weather();
+
+                    //执行实时天气信息查询
+                    weather.getLive(city, function(err, data) {
+                        console.log(err, data);
+                    });
+                });
+            },
             initBoardContent() {
                 let currPage = 0;
                 if (this.activeTab === '教务通知公告') {
