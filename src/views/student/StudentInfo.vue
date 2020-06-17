@@ -2,43 +2,26 @@
     <!--<h1>学生个人信息查询</h1>-->
     <el-tabs style="margin-top: 10px">
         <el-tab-pane label="个人信息" name="first">
-            <div>
-                <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
-                <el-col :span="18">
-                    <div>
-                        <br>
-                        <el-table
-                                :data = "PerData"
-                                style="width: 100%" >
-                            <el-table-column
-                                    prop="id"
-                                    label="学工号">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="name"
-                                    label="姓名">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="sex"
-                                    label="性别">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="age"
-                                    label="年龄">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="mail"
-                                    label="邮箱">
-                            </el-table-column>
-                            <el-table-column
-                                    prop="num"
-                                    label="电话">
-                            </el-table-column>
-                        </el-table>
+            <div style="margin-left: 30%;margin-right: 30%">
+                <el-card class="box-card">
+                    <el-row>
+                        <div>
+                            <div>
+                                <el-image class="identification_photo" :src="this.avatarUrl" alt="" style="margin-left: 40%;margin-right: 40%"/>
+                            </div>
+                        </div></el-row>
+                    <el-divider></el-divider>
+                    <div class="Info">
+                        <div style="margin-top: 20px">姓名：{{user.name}}</div>
+                        <div style="margin-top: 20px" >学号：{{user.id}}</div>
+                        <div style="margin-top: 20px">性别：{{user.sex}}</div>
+                        <div style="margin-top: 20px">电话：{{user.phoneNum}}</div>
+                        <div style="margin-top: 20px">班级：{{user.class}}</div>
+                        <div style="margin-top: 20px">入学时间:{{user.createTime}}</div>
                     </div>
-                </el-col>
-                <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
+                </el-card>
             </div>
+
         </el-tab-pane>
 
         <el-tab-pane label="成绩查询" name="second">
@@ -122,25 +105,44 @@
         </el-tab-pane>
 
         <el-tab-pane label="学籍信息" name="fourth">
-            <div style="margin-left: 30%;margin-right: 30%">
-                    <el-card class="box-card">
-                        <el-row>
-                            <div>
-                                <div>
-                                    <el-image class="identification_photo" :src="this.avatarUrl" alt="" style="margin-left: 40%;margin-right: 40%"/>
-                                </div>
-                        </div></el-row>
-                        <el-divider></el-divider>
-                        <div class="Info">
-                            <div style="margin-top: 20px">姓名：{{user.name}}</div>
-                            <div style="margin-top: 20px" >学号：{{user.id}}</div>
-                            <div style="margin-top: 20px">学院：{{this.initStudents.academyId}}</div>
-                            <div style="margin-top: 20px">专业：{{user.subjectName}}</div>
-                            <div style="margin-top: 20px">班级：{{user.class}}</div>
-                            <div style="margin-top: 20px">入学时间:{{user.createTime}}</div>
-                        </div>
-                    </el-card>
+            <div>
+                <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
+                <el-col :span="18">
+                    <div>
+                        <br>
+                        <el-table
+                                :data = "PerData"
+                                style="width: 100%" >
+                            <el-table-column
+                                    prop="id"
+                                    label="学工号">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="name"
+                                    label="姓名">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="sex"
+                                    label="性别">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="age"
+                                    label="年龄">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="mail"
+                                    label="邮箱">
+                            </el-table-column>
+                            <el-table-column
+                                    prop="num"
+                                    label="电话">
+                            </el-table-column>
+                        </el-table>
+                    </div>
+                </el-col>
+                <el-col :span="3"><div class="grid-content bg-purple"></div></el-col>
             </div>
+
         </el-tab-pane>
     </el-tabs>
 </template>
@@ -153,13 +155,15 @@
                 console.log(tab, event);
             },
             initStudents() {
-                this.postJsonRequest("/web/student/personalInfo",this.user.id).then(resp => {
+                this.loadingFlag = true;
+                this.postJsonRequest("/web/student/personalInfo", 2010110201).then(resp => {
                     this.loadingFlag = false;
                     if (resp) {
                         this.PerData = resp.data.list;
                     }
                 });
-            },
+                this.selectConditionFormVisible = false;
+            }
         },
         data() {
             return {
@@ -179,7 +183,7 @@
                 }],
                 radio: 3,
                 fits: 'fill',
-                url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+                url: ('../../assets/user_pic_middle.gif'),
                 user: ''
             }
         },
