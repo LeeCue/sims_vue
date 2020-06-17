@@ -15,9 +15,11 @@
                         <div style="margin-top: 20px">姓名：{{user.name}}</div>
                         <div style="margin-top: 20px" >学号：{{user.id}}</div>
                         <div style="margin-top: 20px">性别：{{user.sex}}</div>
+                        <div style="margin-top: 20px">年龄：{{user.age}}</div>
                         <div style="margin-top: 20px">电话：{{user.phoneNum}}</div>
-                        <div style="margin-top: 20px">班级：{{user.class}}</div>
-                        <div style="margin-top: 20px">入学时间:{{user.createTime}}</div>
+                        <div style="margin-top: 20px">email：{{user.email}}</div>
+                        <div style="margin-top: 20px">身份证号：{{user.idCard}}</div>
+                        <div style="margin-top: 20px">民族：{{user.nation}}</div>
                     </div>
                 </el-card>
             </div>
@@ -111,7 +113,7 @@
                     <div>
                         <br>
                         <el-table
-                                :data = "PerData"
+                                :data = "SchoolRollData"
                                 style="width: 100%" >
                             <el-table-column
                                     prop="id"
@@ -122,20 +124,20 @@
                                     label="姓名">
                             </el-table-column>
                             <el-table-column
-                                    prop="sex"
-                                    label="性别">
+                                    prop="academy"
+                                    label="学院">
                             </el-table-column>
                             <el-table-column
-                                    prop="age"
-                                    label="年龄">
+                                    prop="major"
+                                    label="专业">
                             </el-table-column>
                             <el-table-column
-                                    prop="mail"
-                                    label="邮箱">
+                                    prop="class"
+                                    label="班级">
                             </el-table-column>
                             <el-table-column
-                                    prop="num"
-                                    label="电话">
+                                    prop="schoolTome"
+                                    label="入学时间">
                             </el-table-column>
                         </el-table>
                     </div>
@@ -156,10 +158,10 @@
             },
             initStudents() {
                 this.loadingFlag = true;
-                this.postJsonRequest("/web/student/personalInfo", 2010110201).then(resp => {
+                this.postJsonRequest("/web/student/personalInfo", this.user.id).then(resp => {
                     this.loadingFlag = false;
                     if (resp) {
-                        this.PerData = resp.data.list;
+                        this.SchoolRollData = resp.data.list;
                     }
                 });
                 this.selectConditionFormVisible = false;
@@ -168,7 +170,7 @@
         data() {
             return {
                 activeName: 'StudentInfo',
-                PerData: [],
+                SchoolRollData: [],
                 scoreData: [{
                    subject:'软件工程',
                     score:'88',
