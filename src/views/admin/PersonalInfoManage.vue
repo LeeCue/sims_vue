@@ -64,33 +64,6 @@
         <el-pagination background @current-change="handlePageChange" layout="prev, pager, next"
                        :page-size="8" :total="total" style="display: flex;justify-content: center"
                        :current-page.sync="currPage"></el-pagination>
-
-        <!--<div>
-            <el-dialog title="信息编辑" :visible.sync="dialogFormVisible">
-                <el-form ref="currUser" :model="currUser" label-width="80px">
-                    <el-form-item label="学工号">
-                        <el-input v-model="currUser.id" :disabled="true"></el-input>
-                    </el-form-item>
-                    <el-form-item label="姓名">
-                        <el-input v-model="currUser.name"></el-input>
-                    </el-form-item>
-                    <el-form-item label="性别">
-                        <el-radio v-model="currUser.sex" label="男">男</el-radio>
-                        <el-radio v-model="currUser.sex" label="女">女</el-radio>
-                    </el-form-item>
-                    <el-form-item label="电话号码">
-                        <el-input v-model="currUser.phoneNum"></el-input>
-                    </el-form-item>
-                    <el-form-item label="个人描述">
-                        <el-input type="textarea" v-model="currUser.description"></el-input>
-                    </el-form-item>
-                    <el-form-item>
-                        <el-button type="primary" @click="updateUser(currUser)">修改</el-button>
-                        <el-button @click="cancelUpdate">取消</el-button>
-                    </el-form-item>
-                </el-form>
-            </el-dialog>
-        </div>-->
     </div>
 </template>
 

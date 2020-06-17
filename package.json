@@ -21,7 +21,7 @@
     "@vue/cli-plugin-vuex": "^4.2.0",
     "@vue/cli-service": "^4.2.0",
     "axios": "^0.18.0",
-    "echarts": "^4.6.0",
+    "echarts": "^4.8.0",
     "vue-cli-plugin-axios": "0.0.4",
     "vue-cli-plugin-element": "^1.0.1",
     "vue-template-compiler": "^2.6.11"
