@@ -109,11 +109,6 @@
                 hasPrePage2: false,
             }
         },
-        watch: {
-            'position.city'(v1, v2) {
-                console.log(this.searchWeather(v1));
-            }
-        },
         mounted() {
             //数据的初始化
             this.drawVisitedNum();
@@ -146,21 +141,7 @@
                 })
             });
         },
-        beforeDestroy() {
-            //document.querySelector('body').removeAttribute('style');
-        },
         methods: {
-            searchWeather(city) {
-                AMap.plugin('AMap.Weather', function() {
-                    //创建天气查询实例
-                    var weather = new AMap.Weather();
-
-                    //执行实时天气信息查询
-                    weather.getLive(city, function(err, data) {
-                        console.log(err, data);
-                    });
-                });
-            },
             initBoardContent() {
                 let currPage = 0;
                 if (this.activeTab === '教务通知公告') {
@@ -189,7 +170,7 @@
                 // 指定图表的配置项和数据
                 let option = {
                     title: {
-                        text: "ECharts"
+                        text: "近七日访问人数"
                     },
                     tooltip: {},
                     legend: {
@@ -216,26 +197,26 @@
             drawAcademyNum() {
                 let myChart = this.$echarts.init(document.getElementById("academyNum"));
                 var data = [{
-                    name: 'Apples',
-                    value: 70
+                    name: '计算机科学与技术学院',
+                    value: 672
                 }, {
-                    name: 'Strawberries',
-                    value: 68
+                    name: '机械与制造学院',
+                    value: 238
                 }, {
-                    name: 'Bananas',
-                    value: 48
+                    name: '人文学院',
+                    value: 572
                 }, {
-                    name: 'Oranges',
-                    value: 40
+                    name: '土木工程学院',
+                    value: 231
                 }, {
-                    name: 'Pears',
-                    value: 32
+                    name: '电气工程学院',
+                    value: 215
                 }, {
-                    name: 'Pineapples',
-                    value: 27
+                    name: '力学与工程学院',
+                    value: 452
                 }, {
-                    name: 'Grapes',
-                    value: 18
+                    name: '经济管理学院',
+                    value: 312
                 }];
                 let option = {
                     title: {
