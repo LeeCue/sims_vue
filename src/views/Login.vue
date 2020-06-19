@@ -47,7 +47,7 @@
         name: "Login",
         data() {
             return {
-                codeURL: 'http://localhost:9000/web/createImageCode',
+                codeURL: 'http://175.24.53.252:9000/web/createImageCode',
                 loginUrl: 'login',
                 loading: false,
                 forbidLogin: true,
@@ -98,7 +98,7 @@
                 this.$refs.loginForm.validate((valid) => {
                     if (valid && !this.forbidLogin) {
                         this.loading = true;
-                        this.postKeyValueRequest('/doLogin', this.loginForm).then(resp => {
+                        this.postKeyValueRequest('/web/doLogin', this.loginForm).then(resp => {
                                 this.loading = false;
                                 if (resp) {
                                     var user = resp.data.user;

@@ -114,6 +114,7 @@
             },
             initTableData(keyword) {
                 this.getRequest('/web/init/board?keyword=' + keyword + '&currPage=' + this.currPage + '&pageSize=' + 5).then(resp => {
+                    console.log(resp.data);
                     if (resp) {
                         this.boardsTotal = resp.data.total;
                         this.tableData = resp.data.list;

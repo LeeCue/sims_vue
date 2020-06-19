@@ -35,12 +35,12 @@ const routes = [
                 path: 'boardDetails',
                 name: '公告详情',
                 component: BoardDetails,
-            }
+            },
         ],
         meta: {
             requireAuth: true
         }
-    }
+    },
 ];
 
 const router = new VueRouter({

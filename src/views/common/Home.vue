@@ -3,25 +3,27 @@
         <el-row :gutter="20" type="flex">
             <!-- 个人信息名片 -->
             <el-col :span="12">
-                <el-card shadow="hover" style="height: 230px; width: 600px;">
-                    <div class="user-info">
-                        <div @click="avatarClick">
-                            <img class="user-avatar" :src=this.avatarUrl alt=""/>
+                <el-row>
+                    <el-card shadow="hover" style="height: 230px; width: 600px;">
+                        <div class="user-info">
+                            <div @click="avatarClick">
+                                <img class="user-avatar" :src=this.avatarUrl alt=""/>
+                            </div>
+                            <div class="user-info-cont">
+                                <div v-text="userInfo.name" style="color: #222;font-size: 25px;"></div>
+                                <div v-text="role"></div>
+                            </div>
                         </div>
-                        <div class="user-info-cont">
-                            <div v-text="userInfo.name" style="color: #222;font-size: 25px;"></div>
-                            <div v-text="role"></div>
+                        <div style="display: flex; font-size: 15px; color: #999;">
+                            本次登陆地点：
+                            <div class="user-info-list">
+                                <span v-text="position.province"></span>
+                                <el-divider direction="vertical"></el-divider>
+                                <span v-text="position.city"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div style="display: flex; font-size: 15px; color: #999;">
-                        本次登陆地点：
-                        <div class="user-info-list">
-                            <span v-text="position.province"></span>
-                            <el-divider direction="vertical"></el-divider>
-                            <span v-text="position.city"></span>
-                        </div>
-                    </div>
-                </el-card>
+                    </el-card>
+                </el-row>
             </el-col>
 
             <el-col :span="12">

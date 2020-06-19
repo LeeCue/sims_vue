@@ -45,7 +45,7 @@ axios.interceptors.response.use(success => {
     return error;
 });
 
-axios.defaults.baseURL = 'http://localhost:9000/';
+axios.defaults.baseURL = 'http://127.0.0.1:9000/';
 axios.defaults.withCredentials = true;
 
 export const postKeyValueRequest = (url, params) => {

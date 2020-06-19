@@ -79,8 +79,13 @@
             },
             onsubmit() {
                 this.postKeyValueRequest('/web/openSystem/config', this.configForm).then(resp => {
+                    console.log(resp);
                     if (resp.data.status === 406) {
-                        this.$message.error('选课系统不可开启!');
+                        if (resp.data.msg) {
+                            this.$message.error(resp.data.object);
+                        } else {
+                            this.$message.error('选课系统不可开启!');
+                        }
                     }
                 });
             },

@@ -82,6 +82,9 @@
                 if (cmd === 'userInfo') {
                     this.$router.replace('/center');
                 }
+                if (cmd === 'setting') {
+                    this.$router.replace('/changePassword');
+                }
                 if (cmd === 'logout') {
                     this.$confirm('此操作将注销登录, 是否继续?', '提示', {
                         confirmButtonText: '确定',
