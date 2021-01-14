@@ -81,6 +81,7 @@
             },
             handleClassChange(value) {
                 if (value.length > 0) {
+                    this.scheduleConfigForm.selectItems = [];
                     for (let i = 0; i < value.length; i++) {
                         this.scheduleConfigForm.selectItems.push(value[i][2]);
                     }
@@ -96,8 +97,7 @@
                 }
             },
             onSubmit() {
-                this.postJsonRequest('/web/schedule/courseConfig', this.scheduleConfigForm).then(resp => {
-                })
+                this.postJsonRequest('/web/schedule/courseConfig', this.scheduleConfigForm).then(resp => {})
             },
             initTeacher(value) {
                 if (value) {

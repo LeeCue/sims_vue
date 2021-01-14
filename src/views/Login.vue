@@ -105,7 +105,6 @@
                                     if (user.avatar === '') {
                                         user.avatar = require('../assets/user_pic_middle.gif');
                                     }
-                                    console.log(user);
                                     this.$store.commit('INIT_USER', JSON.stringify(user));
                                     this.$router.push('/');
                                 }

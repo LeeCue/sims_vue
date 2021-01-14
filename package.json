@@ -7,25 +7,25 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "element-ui": "^2.4.5",
-    "vue": "^2.6.11",
+    "core-js": "^3.8.2",
+    "element-ui": "^2.14.1",
+    "vue": "^2.6.12",
     "vue-amap": "^0.5.10",
-    "vue-router": "^3.1.5",
-    "vuex": "^3.1.2",
+    "vue-router": "^3.4.9",
+    "vuex": "^3.6.0",
     "wangeditor": "^3.1.1"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.2.0",
-    "@vue/cli-plugin-router": "^4.2.0",
-    "@vue/cli-plugin-vuex": "^4.2.0",
-    "@vue/cli-service": "^4.2.0",
+    "@babel/compat-data": "7.9.0",
+    "@vue/cli-plugin-babel": "^4.5.10",
+    "@vue/cli-plugin-router": "^4.5.10",
+    "@vue/cli-plugin-vuex": "^4.5.10",
+    "@vue/cli-service": "^4.5.10",
     "axios": "^0.18.0",
-    "echarts": "^4.8.0",
+    "echarts": "^4.9.0",
     "vue-cli-plugin-axios": "0.0.4",
     "vue-cli-plugin-element": "^1.0.1",
-    "vue-template-compiler": "^2.6.11",
-    "@babel/compat-data": "7.9.0"
+    "vue-template-compiler": "^2.6.12"
   },
   "resolutions": {
     "@babel/preset-env": "7.5.5"
