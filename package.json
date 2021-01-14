@@ -21,7 +21,7 @@
     "@vue/cli-plugin-router": "^4.5.10",
     "@vue/cli-plugin-vuex": "^4.5.10",
     "@vue/cli-service": "^4.5.10",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "echarts": "^4.9.0",
     "vue-cli-plugin-axios": "0.0.4",
     "vue-cli-plugin-element": "^1.0.1",
